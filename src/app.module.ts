@@ -1,0 +1,42 @@
+import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { ArticleModule } from './article/article.module';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { UserModule } from './user/user.module';
+
+@Module({
+  imports: [
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'tester',
+      password: '',
+      database: 'test',
+      synchronize: true,
+      autoLoadEntities: true,
+      namingStrategy: new SnakeNamingStrategy(),
+    }),
+    UserModule,
+    AuthenticationModule,
+    ArticleModule,
+  ],
+  controllers: [AppController],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
+})
+export class AppModule {}
