@@ -1,4 +1,5 @@
 import { Exclude } from 'class-transformer';
+import { ArticleComment } from 'src/article-comment/entities/article-comment.entity';
 import { Article } from 'src/article/entities/article.entity';
 import { Role } from 'src/enums/roles.enum';
 import { BaseEntity } from 'src/resources/base.entity';
@@ -25,8 +26,13 @@ export class User extends BaseEntity {
   @Column()
   password: string;
 
-  @OneToMany((type) => Article, (article) => article.author)
+  @OneToMany((type) => Article, (article) => article.author, { nullable: true })
   articles: Article[];
+
+  @OneToMany((type) => ArticleComment, (comment) => comment.user, {
+    nullable: true,
+  })
+  comments: ArticleComment[];
 
   @Column({ type: 'enum', enum: Role, default: Role.User })
   role: Role;

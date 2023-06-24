@@ -8,6 +8,8 @@ import { AppService } from './app.service';
 import { ArticleModule } from './article/article.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { UserModule } from './user/user.module';
+import { ArticleCommentModule } from './article-comment/article-comment.module';
+import { ArticleCategoryModule } from './article-category/article-category.module';
 
 @Module({
   imports: [
@@ -29,6 +31,8 @@ import { UserModule } from './user/user.module';
     UserModule,
     AuthenticationModule,
     ArticleModule,
+    ArticleCommentModule,
+    ArticleCategoryModule,
   ],
   controllers: [AppController],
   providers: [
