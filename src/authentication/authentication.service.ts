@@ -42,7 +42,7 @@ export class AuthenticationService {
       sub: createdUser.id,
       useremail: createdUser.email,
       username: createdUser.username,
-      roles: user.role,
+      roles: createdUser.role,
     };
     return {
       access_token: await this.jwtService.signAsync(payload),

@@ -1,14 +1,20 @@
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ArticleCategoryModule } from 'src/article-category/article-category.module';
 import { AuthGuard } from 'src/guards/authentication.guard';
+import { RolesGuard } from 'src/guards/role.guard';
+import { UserModule } from 'src/user/user.module';
 import { ArticleController } from './article.controller';
 import { ArticleService } from './article.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { Article } from './entities/article.entity';
-import { RolesGuard } from 'src/guards/role.guard';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Article])],
+  imports: [
+    TypeOrmModule.forFeature([Article]),
+    UserModule,
+    ArticleCategoryModule,
+  ],
   controllers: [ArticleController],
   providers: [
     ArticleService,
@@ -21,5 +27,6 @@ import { RolesGuard } from 'src/guards/role.guard';
       useClass: RolesGuard,
     },
   ],
+  exports: [ArticleService],
 })
 export class ArticleModule {}

@@ -21,5 +21,6 @@ import { RolesGuard } from 'src/guards/role.guard';
       useClass: RolesGuard,
     },
   ],
+  exports: [ArticleCategoryService],
 })
 export class ArticleCategoryModule {}

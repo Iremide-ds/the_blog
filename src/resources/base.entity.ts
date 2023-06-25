@@ -1,4 +1,5 @@
 import { Exclude } from 'class-transformer';
+import * as typeorm from 'typeorm';
 import {
   CreateDateColumn,
   DeleteDateColumn,
@@ -6,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-export class BaseEntity {
+export class BaseEntity extends typeorm.BaseEntity {
   @Exclude()
   @PrimaryGeneratedColumn()
   readonly id: number;

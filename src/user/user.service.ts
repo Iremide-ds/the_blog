@@ -19,7 +19,7 @@ export class UserService {
   }
 
   async findAll() {
-    return await this.usersRepository.find({ withDeleted: true });
+    return await this.usersRepository.find({ loadRelationIds: true });
   }
 
   async findByEmail(email: string): Promise<User | undefined> {
@@ -40,13 +40,11 @@ export class UserService {
 
   async update(id: number, updateUserDto: UpdateUserDto) {
     try {
-      const update = await this.usersRepository.update(id, updateUserDto);
-      if (update.affected > 0) {
-        return 'success';
-      } else {
-        throw new Error();
-      }
+      const user = await this.usersRepository.findOne({ where: { id: id } });
+      Object.assign(user, updateUserDto);
+      return await user.save();
     } catch (error) {
+      console.error(error);
       throw new NotImplementedException();
     }
   }
