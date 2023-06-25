@@ -1,14 +1,13 @@
-# Blog Mobile App API
+# The Blog API
 This repository contains the backend API for a simple CRUD (Create, Read, Update, Delete) operations for a blog mobile app. The API is built using Nest.js, a powerful and scalable Node.js framework.
 
 ## Features
-User authentication and authorization
-Create, read, update, and delete blog posts
-Commenting functionality on blog posts
-User profile management
-Search functionality for blog posts
-Pagination for listing blog posts
-Error handling and validation
+* User authentication and authorization
+* Create, read, update, and delete blog posts
+* Commenting functionality on blog posts
+* User profile management
+* Pagination for listing blog posts
+* Error handling and validation
 
 ## Installation
 
@@ -51,6 +50,9 @@ Contributions are welcome! If you find any issues or would like to add new featu
 Nest is [MIT licensed](LICENSE).
 
 ## Contact
-If you have any questions or suggestions, please feel free to contact me at iremideadeboye@gmail.com.
+If you have any questions or suggestions, please feel free to contact me at:
+- Email: [iremideadeboye@gmail.com](mailto:iremideadeboye@gmail.com)
+- Twitter: @iremide__
+- LinkedIn: [Iremide Adeboye](https://www.linkedin.com/in/iremide-adeboye-02b2b5206/)
 
 Happy coding!
