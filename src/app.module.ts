@@ -24,7 +24,7 @@ import { UserModule } from './user/user.module';
       username: process.env.DBUSER || 'tester',
       password: process.env.FBPASSWORD || '',
       database: process.env.DBNAME || 'test',
-      // ssl: { rejectUnauthorized: true },
+      ssl: { rejectUnauthorized: true },
       synchronize: true,
       autoLoadEntities: true,
       namingStrategy: new SnakeNamingStrategy(),
