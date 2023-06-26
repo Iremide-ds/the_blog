@@ -10,9 +10,11 @@ import { ArticleCommentModule } from './article-comment/article-comment.module';
 import { ArticleModule } from './article/article.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     ThrottlerModule.forRoot({
       ttl: 60,
       limit: 10,
