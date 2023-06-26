@@ -31,8 +31,7 @@ import { UserModule } from './user/user.module';
       dropSchema: false,
       logging: true,
       ssl: {
-        mode: 'VERIFY_IDENTITY',
-        ca: process.env.SSLCERT,
+        rejectUnauthorized: true,
       },
     }),
     UserModule,
