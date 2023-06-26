@@ -5,18 +5,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ArticleCategoryModule } from './article-category/article-category.module';
+import { ArticleCommentModule } from './article-comment/article-comment.module';
 import { ArticleModule } from './article/article.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { UserModule } from './user/user.module';
-import { ArticleCommentModule } from './article-comment/article-comment.module';
-import { ArticleCategoryModule } from './article-category/article-category.module';
-import { ConnectionStringParser } from 'connection-string-parser';
-
-const connectionStringParser = new ConnectionStringParser({
-  scheme: 'mysql',
-  hosts: [],
-});
-const connectionObject = connectionStringParser.parse(process.env.DATABASE_URL);
 
 @Module({
   imports: [
@@ -26,11 +19,12 @@ const connectionObject = connectionStringParser.parse(process.env.DATABASE_URL);
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: connectionObject.hosts[0].host,
-      port: connectionObject.hosts[0].port,
-      username: connectionObject.username,
-      password: connectionObject.password,
-      database: connectionObject.scheme,
+      host: process.env.DBHOST || 'localhost',
+      port: +process.env.DBPORT || 3306,
+      username: process.env.DBUSER || 'tester',
+      password: process.env.FBPASSWORD || '',
+      database: process.env.DBNAME || 'test',
+      ssl: { rejectUnauthorized: true },
       synchronize: true,
       autoLoadEntities: true,
       namingStrategy: new SnakeNamingStrategy(),
