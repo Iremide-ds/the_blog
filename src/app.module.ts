@@ -28,6 +28,7 @@ import { UserModule } from './user/user.module';
       synchronize: true,
       autoLoadEntities: true,
       namingStrategy: new SnakeNamingStrategy(),
+      debug: true,
     }),
     UserModule,
     AuthenticationModule,
