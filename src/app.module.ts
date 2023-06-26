@@ -20,11 +20,11 @@ import { UserModule } from './user/user.module';
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DBHOST || 'localhost',
-      port: +process.env.DBPORT || 3306,
+      // port: +process.env.DBPORT || 3306,
       username: process.env.DBUSER || 'tester',
       password: process.env.FBPASSWORD || '',
       database: process.env.DBNAME || 'test',
-      ssl: { rejectUnauthorized: true },
+      // ssl: { rejectUnauthorized: true },
       synchronize: true,
       autoLoadEntities: true,
       namingStrategy: new SnakeNamingStrategy(),
