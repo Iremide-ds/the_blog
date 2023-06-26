@@ -10,6 +10,13 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { UserModule } from './user/user.module';
 import { ArticleCommentModule } from './article-comment/article-comment.module';
 import { ArticleCategoryModule } from './article-category/article-category.module';
+import { ConnectionStringParser } from 'connection-string-parser';
+
+const connectionStringParser = new ConnectionStringParser({
+  scheme: 'mysql',
+  hosts: [],
+});
+const connectionObject = connectionStringParser.parse(process.env.DATABASE_URL);
 
 @Module({
   imports: [
@@ -18,13 +25,12 @@ import { ArticleCategoryModule } from './article-category/article-category.modul
       limit: 10,
     }),
     TypeOrmModule.forRoot({
-      url: process.env.DATABASE_URL,
       type: 'mysql',
-      // host: process.env.DBHOST || 'localhost',
-      // port: +process.env.DBPORT || 3306,
-      // username: process.env.DBUSER || 'tester',
-      // password: process.env.FBPASSWORD || '',
-      // database: process.env.DBNAME || 'test',
+      host: connectionObject.hosts[0].host,
+      port: connectionObject.hosts[0].port,
+      username: connectionObject.username,
+      password: connectionObject.password,
+      database: connectionObject.scheme,
       synchronize: true,
       autoLoadEntities: true,
       namingStrategy: new SnakeNamingStrategy(),
