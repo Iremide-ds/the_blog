@@ -22,7 +22,7 @@ export class User extends BaseEntity {
   @Column({ default: true })
   isActive: boolean;
 
-  @Exclude()
+  @Exclude({ toPlainOnly: true })
   @Column()
   password: string;
 

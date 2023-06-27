@@ -1,4 +1,8 @@
-import { Injectable, NotImplementedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  NotImplementedException,
+} from '@nestjs/common';
 import { CreateArticleCommentDto } from './dto/create-article-comment.dto';
 import { UpdateArticleCommentDto } from './dto/update-article-comment.dto';
 import { ArticleComment } from './entities/article-comment.entity';
@@ -39,8 +43,13 @@ export class ArticleCommentService {
     }
   }
 
-  async findAll(): Promise<ArticleComment[]> {
-    return await this.commentRepository.find();
+  async findAllByUser(userId: number): Promise<ArticleComment[]> {
+    try {
+      const user = await this.userService.findOne(userId);
+      return user.comments;
+    } catch (error) {
+      throw new NotFoundException();
+    }
   }
 
   async findOne(id: number): Promise<ArticleComment> {

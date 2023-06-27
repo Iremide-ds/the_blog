@@ -23,9 +23,9 @@ export class ArticleCommentController {
     return this.articleCommentService.create(createArticleCommentDto);
   }
 
-  @Get()
-  findAll() {
-    return this.articleCommentService.findAll();
+  @Get('/user/:id')
+  findAll(@Param() userId: FindOneParams) {
+    return this.articleCommentService.findAllByUser(userId.id);
   }
 
   @Get(':id')

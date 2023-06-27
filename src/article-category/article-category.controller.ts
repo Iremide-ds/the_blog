@@ -33,6 +33,11 @@ export class ArticleCategoryController {
     return this.articleCategoryService.findAll();
   }
 
+  @Get('/articles/:id')
+  findAllArticles(@Param() id: FindOneParams) {
+    return this.articleCategoryService.findAllArticles(id.id);
+  }
+
   @Get(':id')
   findOne(@Param() id: FindOneParams) {
     return this.articleCategoryService.findOne(id.id);

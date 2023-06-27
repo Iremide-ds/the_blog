@@ -4,6 +4,7 @@ import { UpdateArticleCategoryDto } from './dto/update-article-category.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ArticleCategory } from './entities/article-category.entity';
 import { In, Repository } from 'typeorm';
+import { Article } from 'src/article/entities/article.entity';
 
 @Injectable()
 export class ArticleCategoryService {
@@ -26,6 +27,14 @@ export class ArticleCategoryService {
 
   async findAll(): Promise<ArticleCategory[]> {
     return await this.categoryRepository.find();
+  }
+
+  async findAllArticles(categoryId: number): Promise<Article[]> {
+    const category = await this.categoryRepository.findOne({
+      where: { id: categoryId },
+      loadRelationIds: true,
+    });
+    return category.articles;
   }
 
   async findMany(id: number[]): Promise<ArticleCategory[]> {
