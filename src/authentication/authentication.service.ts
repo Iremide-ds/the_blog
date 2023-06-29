@@ -51,7 +51,7 @@ export class AuthenticationService {
 
       const payload = { sub: user.id, useremail: user.email, roles: user.role };
       return {
-        access_token: await this.jwtService.signAsync(payload),
+        accessToken: await this.jwtService.signAsync(payload),
       };
     } catch (error) {
       throw new HttpException(
@@ -84,7 +84,7 @@ export class AuthenticationService {
         roles: createdUser.role,
       };
       return {
-        access_token: await this.jwtService.signAsync(payload),
+        accessToken: await this.jwtService.signAsync(payload),
       };
     } catch (error) {
       if (error?.code === PostgresErrorCode.UniqueViolation) {
