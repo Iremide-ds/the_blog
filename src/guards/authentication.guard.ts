@@ -1,8 +1,9 @@
 import {
   CanActivate,
   ExecutionContext,
+  HttpException,
+  HttpStatus,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
@@ -26,16 +27,19 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
     if (!token) {
-      throw new UnauthorizedException();
+      throw new HttpException('No token provided!', HttpStatus.UNAUTHORIZED);
     }
     try {
       const payload = await this.jwtService.verifyAsync(token, {
-        secret: jwtConstants.secret,
+        secret: process.env.SECRET || jwtConstants.secret,
       });
 
       request['user'] = payload;
     } catch {
-      throw new UnauthorizedException();
+      throw new HttpException(
+        'Invalid or expored token provided!',
+        HttpStatus.UNAUTHORIZED,
+      );
     }
     return true;
   }

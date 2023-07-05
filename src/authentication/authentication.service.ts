@@ -28,7 +28,7 @@ export class AuthenticationService {
     );
     if (!isPasswordMatching) {
       throw new HttpException(
-        'Wrong credentials provided',
+        'Wrong password provided',
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -49,7 +49,12 @@ export class AuthenticationService {
 
       await this.verifyPassword(password, user.password);
 
-      const payload = { sub: user.id, useremail: user.email, username: user.username, role: user.role };
+      const payload = {
+        sub: user.id,
+        useremail: user.email,
+        username: user.username,
+        role: user.role,
+      };
       return {
         accessToken: await this.jwtService.signAsync(payload),
       };
