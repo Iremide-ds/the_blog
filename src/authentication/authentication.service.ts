@@ -49,7 +49,7 @@ export class AuthenticationService {
 
       await this.verifyPassword(password, user.password);
 
-      const payload = { sub: user.id, useremail: user.email, roles: user.role };
+      const payload = { sub: user.id, useremail: user.email, username: user.username, role: user.role };
       return {
         accessToken: await this.jwtService.signAsync(payload),
       };
@@ -81,7 +81,7 @@ export class AuthenticationService {
         sub: createdUser.id,
         useremail: createdUser.email,
         username: createdUser.username,
-        roles: createdUser.role,
+        role: createdUser.role,
       };
       return {
         accessToken: await this.jwtService.signAsync(payload),
