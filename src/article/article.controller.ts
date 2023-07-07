@@ -20,7 +20,7 @@ import { FindOneParams } from 'src/resources/findOneParam.dto';
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
-  @Roles(Role.Author, Role.User)
+  @Roles(Role.Author)
   @Post()
   create(@Body() createArticleDto: CreateArticleDto) {
     return this.articleService.create(createArticleDto);
