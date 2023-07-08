@@ -20,7 +20,7 @@ import { FindOneParams } from 'src/resources/findOneParam.dto';
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
-  @Roles(Role.Author)
+  @Roles([Role.Author])
   @Post()
   create(@Body() createArticleDto: CreateArticleDto) {
     return this.articleService.create(createArticleDto);
@@ -36,7 +36,7 @@ export class ArticleController {
     return this.articleService.findOne(id.id);
   }
 
-  @Roles(Role.Author)
+  @Roles([Role.Author])
   @Patch(':id')
   update(
     @Param() id: FindOneParams,
@@ -45,7 +45,7 @@ export class ArticleController {
     return this.articleService.update(id.id, updateArticleDto);
   }
 
-  @Roles(Role.Author, Role.Admin)
+  @Roles([Role.Author, Role.Admin])
   @Delete(':id')
   remove(@Param() id: FindOneParams) {
     return this.articleService.remove(id.id);

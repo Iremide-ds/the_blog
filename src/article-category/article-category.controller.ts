@@ -22,7 +22,7 @@ export class ArticleCategoryController {
     private readonly articleCategoryService: ArticleCategoryService,
   ) {}
 
-  @Roles(Role.Author)
+  @Roles([Role.Author])
   @Post()
   create(@Body() createArticleCategoryDto: CreateArticleCategoryDto) {
     return this.articleCategoryService.create(createArticleCategoryDto);
