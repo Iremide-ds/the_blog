@@ -37,7 +37,7 @@ export class Article extends BaseEntity {
       name: value.name,
     };
   })
-  @ManyToMany((type) => ArticleCategory, (category) => category.articles)
+  @ManyToMany(() => ArticleCategory)
   categories: ArticleCategory[];
 
   @Transform(({ value }) => {
