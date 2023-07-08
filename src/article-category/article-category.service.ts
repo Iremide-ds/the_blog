@@ -26,7 +26,7 @@ export class ArticleCategoryService {
   }
 
   async findAll(): Promise<ArticleCategory[]> {
-    return await this.categoryRepository.find();
+    return await this.categoryRepository.find({ loadRelationIds: true });
   }
 
   async findAllArticles(categoryId: number): Promise<Article[]> {
