@@ -1,9 +1,8 @@
 import { Transform } from 'class-transformer';
-import { ArticleCategory } from 'src/article-category/entities/article-category.entity';
 import { ArticleComment } from 'src/article-comment/entities/article-comment.entity';
 import { BaseEntity } from 'src/resources/base.entity';
 import { User } from 'src/user/entities/user.entity';
-import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class Article extends BaseEntity {
@@ -30,15 +29,6 @@ export class Article extends BaseEntity {
   })
   @ManyToOne((type) => User, (author) => author.articles)
   author: User;
-
-  @Transform(({ value }) => {
-    return {
-      id: value.id,
-      name: value.name,
-    };
-  })
-  @ManyToMany(() => ArticleCategory)
-  categories: ArticleCategory[];
 
   @Transform(({ value }) => {
     return {

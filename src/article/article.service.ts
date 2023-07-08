@@ -24,10 +24,14 @@ export class ArticleService {
     const article = this.articleRepository.create({
       ...createArticleDto,
       author: user,
-      categories: categories,
     });
 
-    return await article.save();
+    const savedArticle = await article.save();
+
+    for (let i = 0; i < categories.length; i++) {
+      categories[i].articles.push(savedArticle);
+    }
+    return savedArticle;
   }
 
   async findAll() {
