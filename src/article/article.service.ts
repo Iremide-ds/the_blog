@@ -30,6 +30,7 @@ export class ArticleService {
 
     for (let i = 0; i < categories.length; i++) {
       categories[i].articles.push(savedArticle);
+      await categories[i].save();
     }
     return savedArticle;
   }

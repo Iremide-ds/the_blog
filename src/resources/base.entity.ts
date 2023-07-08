@@ -1,4 +1,3 @@
-import { Exclude } from 'class-transformer';
 import * as typeorm from 'typeorm';
 import {
   CreateDateColumn,
@@ -8,7 +7,7 @@ import {
 } from 'typeorm';
 
 export class BaseEntity extends typeorm.BaseEntity {
-  @Exclude()
+  // @Exclude()
   @PrimaryGeneratedColumn()
   readonly id: number;
 
