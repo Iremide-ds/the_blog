@@ -18,8 +18,15 @@ export class UserService {
     return await this.usersRepository.save(createUserDto);
   }
 
-  async findAll() {
+  async findAll(): Promise<User[]> {
     return await this.usersRepository.find({ loadRelationIds: true });
+  }
+
+  async findProfile(id: number): Promise<User> {
+    return await this.usersRepository.findOne({
+      where: { id: id },
+      loadRelationIds: true,
+    });
   }
 
   async findByEmail(email: string): Promise<User | undefined> {
