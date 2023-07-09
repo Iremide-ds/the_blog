@@ -31,10 +31,9 @@ export class Article extends BaseEntity {
   author: User;
 
   @Transform(({ value }) => {
-    return {
-      id: value.id,
-      name: value.name,
-    };
+    return value.map((comment) => {
+      return { id: comment.id, content: comment.comment };
+    });
   })
   @OneToMany((type) => ArticleComment, (comment) => comment.article)
   comments: ArticleComment[];

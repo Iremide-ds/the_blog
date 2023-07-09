@@ -34,6 +34,7 @@ export class User extends BaseEntity {
   })
   comments: ArticleComment[];
 
+  @Exclude({ toPlainOnly: true })
   @Column({ type: 'enum', enum: Role, default: Role.User })
   role: Role;
 }
