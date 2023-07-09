@@ -38,7 +38,10 @@ export class ArticleCategoryService {
   }
 
   async findMany(id: number[]): Promise<ArticleCategory[]> {
-    return await this.categoryRepository.find({ where: { id: In(id) } });
+    return await this.categoryRepository.find({
+      where: { id: In(id) },
+      loadRelationIds: true,
+    });
   }
 
   async findOne(id: number): Promise<ArticleCategory> {
